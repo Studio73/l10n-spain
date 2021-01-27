@@ -24,10 +24,10 @@ class TestL10nEsAeatVatProrrateBase(TestL10nEsAeatMod303Base):
         self.invoice_purchase = self._invoice_purchase_create("2017-01-03")
         self.invoice_sale = self._invoice_sale_create("2017-01-13")
         self.journal = self.env["account.journal"].create(
-            {"name": "Test journal", "code": "TEST", "type": "general",}
+            {"name": "Test journal", "code": "TEST", "type": "general"}
         )
         self.account_type = self.env["account.account.type"].create(
-            {"name": "Test account type", "type": "other",}
+            {"name": "Test account type", "type": "other", "internal_group": "expense"}
         )
         self.counterpart_account = self.env["account.account"].create(
             {
@@ -83,8 +83,8 @@ class TestL10nEsAeatVatProrrate(TestL10nEsAeatVatProrrateBase):
         # Last trimester
         wizard = (
             self.env["l10n.es.aeat.compute.vat.prorrate"]
-            .with_context(active_id=self.model303_4t.id,)
-            .create({"year": 2017,})
+            .with_context(active_id=self.model303_4t.id)
+            .create({"year": 2017})
         )
         wizard.button_compute()
         self.assertAlmostEqual(self.model303_4t.vat_prorrate_percent, 87, 2)

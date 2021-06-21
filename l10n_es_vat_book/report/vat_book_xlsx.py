@@ -359,13 +359,13 @@ class VatNumberXlsx(models.AbstractModel):
         for line in lines:
             with_total = True
             for tax_line in line.tax_line_ids:
-                if not tax_line.special_tax_group:
-                    # TODO: Payments bucle
-                    self.fill_issued_row_data(
-                        issued_sheet, row, line, tax_line, with_total, draft_export
-                    )
-                    with_total = False
-                    row += 1
+                # if not tax_line.special_tax_group:
+                # TODO: Payments bucle
+                self.fill_issued_row_data(
+                    issued_sheet, row, line, tax_line, with_total, draft_export
+                )
+                with_total = False
+                row += 1
 
         # Received
         received_sheet = self.create_received_sheet(workbook, book, draft_export)
@@ -375,10 +375,10 @@ class VatNumberXlsx(models.AbstractModel):
         for line in lines:
             with_total = True
             for tax_line in line.tax_line_ids:
-                if not tax_line.special_tax_group:
-                    # TODO: Payments bucle
-                    self.fill_received_row_data(
-                        received_sheet, row, line, tax_line, with_total, draft_export
-                    )
-                    with_total = False
-                    row += 1
+                # if not tax_line.special_tax_group:
+                # TODO: Payments bucle
+                self.fill_received_row_data(
+                    received_sheet, row, line, tax_line, with_total, draft_export
+                )
+                with_total = False
+                row += 1

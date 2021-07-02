@@ -193,3 +193,42 @@ class DeliveryCarrier(models.Model):
         return MrwRequest(
             wsdl_file, "00610", "701125", "00610SGQUADEST", "00610SGQUADEST"
         )
+
+    def mrw_rate_shipment(self, order):
+        """Not implemented"""
+        raise NotImplementedError(
+            _(
+                """MRW API doesn't provide methods to compute delivery rates, so
+                you should rely on another price method instead or override this
+                one in your custom code."""
+            )
+        )
+
+    def mrw_tracking_state_update(self, picking):
+        """Not implemented"""
+        raise NotImplementedError(
+            _("MRW API doesn't provide methods to update tracking state")
+        )
+
+    def mrw_get_tracking_link(self, picking):
+        if self.prod_environment:
+            return (
+                "http://sagec.mrw.es/Panel.aspx?Franq={franchise}"
+                "&Ab={subscriber}&Dep=&Pwd={password}&Usr={user}&NumEnv={numenv}"
+            ).format(
+                franchise=self.mrw_api_franchise,
+                subscriber=self.mrw_api_subscriber,
+                user=self.mrw_api_user,
+                password=self.mrw_api_password,
+                numenv=picking.carrier_tracking_ref,
+            )
+        return (
+            "http://sagec-test.mrw.es/Panel.aspx?Franq={franchise}"
+            "&Ab={subscriber}&Dep=&Pwd={password}&Usr={user}&NumEnv={numenv}"
+        ).format(
+            franchise="00610",
+            subscriber="701125",
+            user="00610SGQUADEST",
+            password="00610SGQUADEST",
+            numenv=picking.carrier_tracking_ref,
+        )

@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* delivery_mrw
+# 	* delivery_mrw
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-04 08:06+0000\n"
-"PO-Revision-Date: 2020-12-04 08:06+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2021-07-02 10:34+0000\n"
+"PO-Revision-Date: 2021-07-02 10:34+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,42 +21,37 @@ msgid "(Optional) delivery with return"
 msgstr "Envío con retorno"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0235
 msgid "Bag 14"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0230
 msgid "Bag 19"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,delivery_type:0
-msgid "Based on Rules"
-msgstr "En base a reglas"
-
-#. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0480
 msgid "Caja Express 3 Kilos"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_in_franchise:0
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_close_time
+msgid "Closing time"
+msgstr "Hora de cierre"
+
+#. module: delivery_mrw
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_in_franchise__a
 msgid "Collection and delivery in franchise"
 msgstr "Con recogida y entrega en franquicia."
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_in_franchise:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_in_franchise__r
 msgid "Collection in Franchise"
 msgstr "Con recogida en franquicia."
 
 #. module: delivery_mrw
-#: model:ir.model,name:delivery_mrw.model_delivery_carrier
-msgid "Delivery Methods"
-msgstr "Métodos de envío"
-
-#. module: delivery_mrw
-#: selection:delivery.carrier,mrw_in_franchise:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_in_franchise__e
 msgid "Delivery in Franchise"
 msgstr "Con entrega en franquicia"
 
@@ -66,42 +61,48 @@ msgid "Delivery on Saturday"
 msgstr "Entrega en sábado"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__display_name
+#: model:ir.model.fields,field_description:delivery_mrw.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: delivery_mrw
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0490
 msgid "Documentos 14"
 msgstr "Documentos 14"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0800
 msgid "Ecommerce"
 msgstr "Ecommerce"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0810
 msgid "Ecommerce Canje"
 msgstr "Ecommerce Canje"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0300
 msgid "Economico"
 msgstr "Economico"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0350
 msgid "Economico Interinsular"
 msgstr "Economico Interinsular"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0310
 msgid "Economico Mas 40 Kilos"
 msgstr "Economico Mas 40 Kilos"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0450
 msgid "Express 2 Kilos"
 msgstr "Express 2 Kilos"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0400
 msgid "Express Documentos"
 msgstr "Express Documentos"
 
@@ -115,10 +116,15 @@ msgstr "Precio fijo"
 msgid "Franchise"
 msgstr "Franquicia"
 
-
 #. module: delivery_mrw
 #: model:ir.model.fields,field_description:delivery_mrw.field_stock_picking__has_mrw_carrier
 msgid "Has MRW carrier"
+msgstr "Tiene transportista MRW"
+
+#. module: delivery_mrw
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__id
+#: model:ir.model.fields,field_description:delivery_mrw.field_stock_picking__id
+msgid "ID"
 msgstr ""
 
 #. module: delivery_mrw
@@ -132,9 +138,44 @@ msgid "Label Type"
 msgstr "Tipo Etiqueta"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,delivery_type:0
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_last_request
+msgid "Last MRW API request"
+msgstr "Última petición a MRW"
+
+#. module: delivery_mrw
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_last_response
+msgid "Last MRW API response"
+msgstr "Última respuesta de MRW"
+
+#. module: delivery_mrw
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier____last_update
+#: model:ir.model.fields,field_description:delivery_mrw.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: delivery_mrw
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__delivery_type__mrw
 msgid "MRW"
 msgstr "MRW"
+
+#. module: delivery_mrw
+#: code:addons/delivery_mrw/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"MRW API doesn't provide methods to compute delivery rates, so\n"
+"                you should rely on another price method instead or override this\n"
+"                one in your custom code."
+msgstr ""
+"MRW API no provee ninguna forma de calcular las tarifas de envío, por\n"
+"                lo tanto se deberia usar otro método o sobreescribir este en una herencia \n"
+"            "
+
+#. module: delivery_mrw
+#: code:addons/delivery_mrw/models/delivery_carrier.py:0
+#, python-format
+msgid "MRW API doesn't provide methods to update tracking state"
+msgstr "MRW API no provee ninguna forma para actualizar el estado del envío"
+
 
 #. module: delivery_mrw
 #: model_terms:ir.ui.view,arch_db:delivery_mrw.view_delivery_carrier_form
@@ -142,9 +183,11 @@ msgid "MRW Configuration"
 msgstr "Configuración MRW"
 
 #. module: delivery_mrw
-#: code:addons/delivery_mrw/models/mrw_request.py:536
+#: code:addons/delivery_mrw/models/mrw_request.py:0
+#: code:addons/delivery_mrw/models/mrw_request.py:0
 #, python-format
-msgid "MRW Error\n"
+msgid ""
+"MRW Error\n"
 "%s"
 msgstr "MRW Error\n"
 "%s"
@@ -155,26 +198,40 @@ msgid "MRW Label"
 msgstr "Etiqueta MRW"
 
 #. module: delivery_mrw
-#: code:addons/delivery_mrw/models/delivery_carrier.py:254
+#: code:addons/delivery_mrw/models/delivery_carrier.py:0
 #, python-format
-msgid "MRW Shipping extra info:\n"
+msgid ""
+"MRW Shipping cancelado:\n"
+"%s"
+msgstr ""
+"MRW Shipping cancelado:\n"
+"%s"
+
+#. module: delivery_mrw
+#: code:addons/delivery_mrw/models/delivery_carrier.py:0
+#, python-format
+msgid ""
+"MRW Shipping extra info:\n"
 "barcode: %s"
-msgstr "Envío MRW información extra:\n"
+msgstr ""
+"Envío MRW información extra:\n"
 "código: %s"
 
 #. module: delivery_mrw
-#: code:addons/delivery_mrw/models/stock_picking.py:31
+#: code:addons/delivery_mrw/models/stock_picking.py:0
 #, python-format
 msgid "MRW label for %s"
-msgstr ""
+msgstr "Etiqueta MRW para %s"
 
 #. module: delivery_mrw
-#: code:addons/delivery_mrw/models/mrw_request.py:466
+#: code:addons/delivery_mrw/models/mrw_request.py:0
 #, python-format
-msgid "MRW: No response from server getting label from ref {}.\n"
+msgid ""
+"MRW: No response from server getting label from ref {}.\n"
 "Traceback:\n"
 "{}"
-msgstr "MRWW: No hay respuesta del servidor para obtener la etiqueta de la referencia {}.\n"
+msgstr ""
+"MRW: No hay respuesta del servidor para obtener la etiqueta de la referencia {}.\n"
 "Mensaje de Error:\n"
 "{}"
 
@@ -189,29 +246,37 @@ msgid "Margin Top"
 msgstr "Margen Superior"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_delivery_on_saturday:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_delivery_on_saturday__n
 msgid "No"
 msgstr "No"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_in_franchise:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_in_franchise__n
 msgid "No collection or delivery in franchise"
 msgstr "Sin recogida ni entrega en franquicia"
 
 #. module: delivery_mrw
-#: code:addons/delivery_mrw/models/mrw_request.py:357
+#: code:addons/delivery_mrw/models/mrw_request.py:0
+#: code:addons/delivery_mrw/models/mrw_request.py:0
 #, python-format
-msgid "No response from server recording MRW delivery {}.\n"
+msgid ""
+"No response from server recording MRW delivery {}.\n"
 "Traceback:\n"
 "{}"
-msgstr "No se ha obtenido respuesta del servidor al registrar el envío de MRW {}.\n"
+msgstr ""
+"No se ha obtenido respuesta del servidor al registrar el envío de MRW {}.\n"
 "Traceback:\n"
 "{}"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_return:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_return__n
 msgid "No return"
 msgstr "Sin retorno"
+
+#. module: delivery_mrw
+#: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_open_time
+msgid "Opening time"
+msgstr "Hora de apertura"
 
 #. module: delivery_mrw
 #: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_api_password
@@ -219,7 +284,7 @@ msgid "Password"
 msgstr "Contraseña"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0010
 msgid "Promociones"
 msgstr "Promociones"
 
@@ -234,14 +299,14 @@ msgid "Refund"
 msgstr "Reembolso"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_refund:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_refund__d
 msgid "Refund at Destiny"
-msgstr "on reembolso comisión en destino"
+msgstr "Con reembolso comisión en destino"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_refund:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_refund__o
 msgid "Refund at Origin"
-msgstr "on reembolso comisión en origen"
+msgstr "Con reembolso comisión en origen"
 
 #. module: delivery_mrw
 #: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_return
@@ -249,17 +314,17 @@ msgid "Return"
 msgstr "Retorno"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_return:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_return__d
 msgid "Return Collect at Destiny"
 msgstr "Retorno de albarán cobro en destino"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_return:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_return__o
 msgid "Return Collect at Origin"
 msgstr "Retorno de albarán cobro en origen"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_return:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_return__s
 msgid "Return of merchandise"
 msgstr "Retorno de mercancia"
 
@@ -274,6 +339,11 @@ msgid "Set the contracted MRW Service"
 msgstr "Servicio contratado en MRW"
 
 #. module: delivery_mrw
+#: model:ir.model,name:delivery_mrw.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de envío"
+
+#. module: delivery_mrw
 #: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_api_subscriber
 msgid "Subscriber"
 msgstr "Abonado"
@@ -281,7 +351,7 @@ msgstr "Abonado"
 #. module: delivery_mrw
 #: model:ir.model,name:delivery_mrw.model_stock_picking
 msgid "Transfer"
-msgstr "Transferir"
+msgstr "Albarán"
 
 #. module: delivery_mrw
 #: model:ir.model.fields,field_description:delivery_mrw.field_delivery_carrier__mrw_api_user
@@ -289,57 +359,62 @@ msgid "UID"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0000
 msgid "Urgente 10"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0100
 msgid "Urgente 12"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0110
 msgid "Urgente 14"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0200
 msgid "Urgente 19"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0205
 msgid "Urgente 19 Expedicion"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0210
 msgid "Urgente 19 Mas 40 Kilos"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0220
 msgid "Urgente 19 Portugal"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0120
 msgid "Urgente 22"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_service:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_service__0005
 msgid "Urgente Hoy"
 msgstr ""
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_refund:0
-msgid "Without Refund"
-msgstr ""
+#: model:ir.model.fields,help:delivery_mrw.field_delivery_carrier__mrw_last_request
+#: model:ir.model.fields,help:delivery_mrw.field_delivery_carrier__mrw_last_response
+msgid "Used for debugging"
+msgstr "Usado para debugging"
 
 #. module: delivery_mrw
-#: selection:delivery.carrier,mrw_delivery_on_saturday:0
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_refund__n
+msgid "Without Refund"
+msgstr "Sin devoluciones"
+
+#. module: delivery_mrw
+#: model:ir.model.fields.selection,name:delivery_mrw.selection__delivery_carrier__mrw_delivery_on_saturday__s
 msgid "Yes"
 msgstr "Sí"
-

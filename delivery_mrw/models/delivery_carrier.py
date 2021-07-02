@@ -18,39 +18,40 @@ from .mrw_request import (
 class DeliveryCarrier(models.Model):
     _inherit = "delivery.carrier"
 
-    delivery_type = fields.Selection(selection_add=[("mrw", "MRW")])
-
+    delivery_type = fields.Selection(
+        selection_add=[("mrw", "MRW")], ondelete={"mrw": "set default"}
+    )
     mrw_api_franchise = fields.Char(string="Franchise")
     mrw_api_subscriber = fields.Char(string="Subscriber")
     mrw_api_user = fields.Char(string="UID")
     mrw_api_password = fields.Char(string="Password")
-
     mrw_service = fields.Selection(
-        selection=MRW_SERVICES,
-        string="Service",
-        help="Set the contracted MRW Service",
+        selection=MRW_SERVICES, string="Service", help="Set the contracted MRW Service"
     )
-
     mrw_in_franchise = fields.Selection(
         selection=MRW_IN_FRANCHISE, string="In Franchise", default="N"
     )
-
     mrw_delivery_on_saturday = fields.Selection(
         selection=MRW_BOOLEAN, string="Delivery on Saturday", default="N"
     )
-
     mrw_return = fields.Selection(
         selection=MRW_RETURN,
         string="Return",
         help="(Optional) delivery with return",
         default="N",
     )
-
     mrw_refund = fields.Selection(selection=MRW_REFUND, string="Refund")
-
     mrw_label_type = fields.Integer(string="Label Type", default=0)
     mrw_margin_top = fields.Integer(string="Margin Top", default=1100)
     mrw_margin_left = fields.Integer(string="Margin Left", default=650)
+    mrw_open_time = fields.Char(string="Opening time", default="08:00")
+    mrw_close_time = fields.Char(string="Closing time", default="18:00")
+    mrw_last_request = fields.Text(
+        string="Last MRW API request", help="Used for debugging", readonly=True
+    )
+    mrw_last_response = fields.Text(
+        string="Last MRW API response", help="Used for debugging", readonly=True
+    )
 
     def _get_mrw_wsdl_file(self):
         wsdl_file = "mrw-api-test.wsdl"
@@ -85,8 +86,8 @@ class DeliveryCarrier(models.Model):
             "entrega_telefono": partner.phone or partner.mobile or "",
             "entrega_contacto": "",
             "entrega_atencion": "",
-            "entrega_horario_rango_desde": "08:00",
-            "entrega_horario_rango_hasta": "18:00",
+            "entrega_horario_rango_desde": self.mrw_open_time,
+            "entrega_horario_rango_hasta": self.mrw_close_time,
             "entrega_observaciones": "",
             "fecha": fields.Date.today().strftime("%d/%m/%Y"),
             "referencia_albaran": picking.name,
@@ -109,21 +110,14 @@ class DeliveryCarrier(models.Model):
         to this design, we have to inject vals in the context to be able to
         add them to the message.
         """
-        wsdl_file = self._get_mrw_wsdl_file()
-        mrw_request = MrwRequest(
-            wsdl_file,
-            self.mrw_api_franchise,
-            self.mrw_api_subscriber,
-            self.mrw_api_user,
-            self.mrw_api_password,
-        )
+        mrw_request = self._make_mrw_request()
         result = []
         for picking in pickings:
             vals = self._prepare_mrw_shipping(picking)
             vals.update({"tracking_number": False, "exact_price": 0})
             response = mrw_request._send_shipping(vals)
-            self.mrw_request = response["mrw_sent_xml"]
-            self.mrw_response = response["response"] or ""
+            self.mrw_last_request = response["mrw_sent_xml"]
+            self.mrw_last_response = response["response"] or ""
             if not response["tracking_number"]:
                 result.append(vals)
                 continue
@@ -162,14 +156,22 @@ class DeliveryCarrier(models.Model):
         }
 
     def mrw_request_label(self, tracking_number):
-        wsdl_file = self._get_mrw_wsdl_file()
-        mrw_request = MrwRequest(
-            wsdl_file,
-            self.mrw_api_franchise,
-            self.mrw_api_subscriber,
-            self.mrw_api_user,
-            self.mrw_api_password,
-        )
+        mrw_request = self._make_mrw_request()
         vals = self._prepare_mrw_request_label(tracking_number)
         response = mrw_request._request_label(vals)
         return response
+
+    def _make_mrw_request(self):
+        wsdl_file = self._get_mrw_wsdl_file()
+        if self.prod_environment:
+            return MrwRequest(
+                wsdl_file,
+                self.mrw_api_franchise,
+                self.mrw_api_subscriber,
+                self.mrw_api_user,
+                self.mrw_api_password,
+            )
+        # test user credentials
+        return MrwRequest(
+            wsdl_file, "00610", "701125", "00610SGQUADEST", "00610SGQUADEST"
+        )

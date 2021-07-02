@@ -55,10 +55,7 @@ MRW_IN_FRANCHISE = [
     ),  # Con recogida y entrega en franquicia.
 ]
 
-MRW_BOOLEAN = [
-    ("S", "Yes"),
-    ("N", "No"),
-]
+MRW_BOOLEAN = [("S", "Yes"), ("N", "No")]
 
 MRW_RETURN = [
     ("N", "No return"),
@@ -264,7 +261,7 @@ class MrwRequest:
         wsdl_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "../api/%s" % wsdl_file
         )
-        self.franchise = franchise or ""
+        self.franchise = franchise
         self.subscriber = subscriber
         self.mrw_user_id = user_id
         self.mrw_pass = password
@@ -292,18 +289,18 @@ class MrwRequest:
 
     def _get_mrw_header(self):
         mrw_ns = ("mrw", "http://www.mrw.es/")
-        mrw_franchise = Element("CodigoFranquicia", ns=mrw_ns).setText("00610")
-        mrw_subscriber = Element("CodigoAbonado", ns=mrw_ns).setText("701125")
+        mrw_franchise = Element("CodigoFranquicia", ns=mrw_ns).setText(self.franchise)
+        mrw_subscriber = Element("CodigoAbonado", ns=mrw_ns).setText(self.subscriber)
         mrw_dept_code = Element("CodigoDepartamento", ns=mrw_ns).setText("")
-        mrw_username = Element("UserName", ns=mrw_ns).setText("00610SGQUADEST")
-        mrw_passwd = Element("Password", ns=mrw_ns).setText("00610SGQUADEST")
+        mrw_username = Element("UserName", ns=mrw_ns).setText(self.mrw_user_id)
+        mrw_passwd = Element("Password", ns=mrw_ns).setText(self.mrw_pass)
         mrw_authinfo = Element("AuthInfo>", ns=mrw_ns).append(
             [mrw_franchise, mrw_subscriber, mrw_dept_code, mrw_username, mrw_passwd]
         )
         return mrw_authinfo
 
     def _prepare_transmenvio(self, **kwargs):
-        """ASM API is not very standard. Prepare parameters to pass them raw in
+        """MRW API is not very standard. Prepare parameters to pass them raw in
         the SOAP message"""
         return """
         <mrw:DatosEntrega>

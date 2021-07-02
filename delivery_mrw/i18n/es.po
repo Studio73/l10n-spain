@@ -18,7 +18,7 @@ msgstr ""
 #. module: delivery_mrw
 #: model:ir.model.fields,help:delivery_mrw.field_delivery_carrier__mrw_return
 msgid "(Optional) delivery with return"
-msgstr "Eenvío con retorno"
+msgstr "Envío con retorno"
 
 #. module: delivery_mrw
 #: selection:delivery.carrier,mrw_service:0

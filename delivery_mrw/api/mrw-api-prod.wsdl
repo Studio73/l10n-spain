@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.mrw.es/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.mrw.es/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.mrw.es/">
@@ -619,6 +619,81 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="GetPointsDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:PointsRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PointsRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Point" type="tns:PointRequest"/>
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PointRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codigoPoint" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPointsDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPointsDBResult" type="tns:PointsResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PointsResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PointList" type="tns:ArrayOfPuntoDeRedDTO"/>
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPuntoDeRedDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PuntoDeRedDTO" nillable="true" type="tns:PuntoDeRedDTO"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PuntoDeRedDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoPuntoVinculado" type="tns:CodigoPointDTO"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Direccion" type="tns:DireccionPuntoDTO"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CodigoPointDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Codigo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Tipo" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DireccionPuntoDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Pais" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CodigoPostal" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Provincia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Poblacion" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="TipoVia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="NombreVia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="NumeroVia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Resto" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Google" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Latitud" nillable="true" type="s:double"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Longitud" nillable="true" type="s:double"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Zona" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="GrupoZona" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="TransmitirEnvioSoapIn">
@@ -693,6 +768,15 @@
   <wsdl:message name="CancelarEnvioAuthInfo">
     <wsdl:part name="AuthInfo" element="tns:AuthInfo"/>
   </wsdl:message>
+  <wsdl:message name="GetPointsDBSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPointsDB"/>
+  </wsdl:message>
+  <wsdl:message name="GetPointsDBSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPointsDBResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetPointsDBAuthInfo">
+    <wsdl:part name="AuthInfo" element="tns:AuthInfo"/>
+  </wsdl:message>
   <wsdl:portType name="MRWEnvioSoap">
     <wsdl:operation name="TransmitirEnvio">
       <wsdl:input message="tns:TransmitirEnvioSoapIn"/>
@@ -725,6 +809,10 @@
     <wsdl:operation name="CancelarEnvio">
       <wsdl:input message="tns:CancelarEnvioSoapIn"/>
       <wsdl:output message="tns:CancelarEnvioSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="PointsDB">
+      <wsdl:input name="GetPointsDB" message="tns:GetPointsDBSoapIn"/>
+      <wsdl:output name="GetPointsDB" message="tns:GetPointsDBSoapOut"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MRWEnvioSoap" type="tns:MRWEnvioSoap">
@@ -809,6 +897,16 @@
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="PointsDB">
+      <soap:operation soapAction="http://www.mrw.es/GetPointsDB" style="document"/>
+      <wsdl:input name="GetPointsDB">
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetPointsDBAuthInfo" part="AuthInfo" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetPointsDB">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="MRWEnvioSoap12" type="tns:MRWEnvioSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -889,6 +987,16 @@
         <soap12:header message="tns:CancelarEnvioAuthInfo" part="AuthInfo" use="literal"/>
       </wsdl:input>
       <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PointsDB">
+      <soap12:operation soapAction="http://www.mrw.es/GetPointsDB" style="document"/>
+      <wsdl:input name="GetPointsDB">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetPointsDBAuthInfo" part="AuthInfo" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetPointsDB">
         <soap12:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>

@@ -382,6 +382,48 @@ class MrwRequest:
         }
         return res
 
+    def _prepare_cancel(self, **kwargs):
+        """MRW API is not very standard. Prepare parameters to pass them raw in
+        the SOAP message"""
+        return """
+        <mrw:CancelaEnvio>
+            <mrw:NumeroEnvioOriginal>{tracking_ref}</mrw:NumeroEnvioOriginal>
+        </mrw:CancelaEnvio>
+        """.format(
+            **kwargs
+        )
+
+    def _cancel_shipping(self, vals):
+        """Cancel shipment
+        :params vals dict of needed values
+        :returns dict with MRW response containing the confirm message and tracking_ref
+        """
+        xml = Raw(self._prepare_cancel(**vals))
+        _logger.debug(xml)
+        try:
+            mrw_authinfo = self._get_mrw_header()
+            self.client.set_options(soapheaders=(mrw_authinfo))
+            res = self.client.service.CancelarEnvio(xml)
+        except Exception as e:
+            raise UserError(
+                _(
+                    "No response from server recording MRW delivery {}.\n"
+                    "Traceback:\n{}"
+                ).format(vals.get("referencia_c", ""), e)
+            )
+        # Convert result suds object to dict:
+        res_mrw = self._recursive_asdict(res)
+        if res_mrw["Estado"] == "0":
+            # Bad Credentials:
+            raise UserError(_("MRW Error\n%s") % res["Mensaje"])
+        res = {
+            "mrw_sent_xml": xml,
+            "message": res_mrw["Mensaje"],
+            "tracking_number": res_mrw["NumeroEnvio"],
+            "response": res_mrw,
+        }
+        return res
+
     def _prepare_request_label(self, **kwargs):
         return """
         <mrw:NumeroEnvio>{numero_envio}</mrw:NumeroEnvio>

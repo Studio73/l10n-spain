@@ -138,6 +138,24 @@ class DeliveryCarrier(models.Model):
             result.append(vals)
         return result
 
+    def mrw_cancel_shipment(self, pickings):
+        """Cancel the shipment
+        :param pickings: A recordset of pickings
+        :return list: A list of dictionaries although in practice it's
+        called one by one and only the first item in the dict is taken. Due
+        to this design, we have to inject vals in the context to be able to
+        add them to the message.
+        """
+        mrw_request = self._make_mrw_request()
+        for picking in pickings.filtered("carrier_tracking_ref"):
+            vals = {"tracking_ref": picking.carrier_tracking_ref}
+            response = mrw_request._cancel_shipping(vals)
+            self.mrw_last_request = response["mrw_sent_xml"]
+            self.mrw_last_response = response["response"] or ""
+            picking.carrier_tracking_ref = ""
+            body = _("MRW Shipping cancelado:\n" "%s") % response.get("message")
+            picking.message_post(body=body)
+
     def _prepare_mrw_request_label(self, tracking_number):
         """Convert picking values for mrw api
         :param picking record with picking to send

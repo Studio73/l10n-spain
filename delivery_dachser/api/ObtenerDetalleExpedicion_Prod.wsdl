@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ObtenerDetalleExpedicion" targetNamespace="http://obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es/">
+    <wsdl:types>
+        <xsd:schema xmlns:tns="http://exceptions.support.ibuilder.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://exceptions.support.ibuilder.indra.es">
+            <xsd:complexType name="ServiceException">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="timestamp" type="xsd:dateTime" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema xmlns:ns0="http://general.vos.comun.azkarview.indra.es" xmlns:ns1="http://vos.obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es" xmlns:ns2="http://exceptions.support.ibuilder.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es/">
+            <xsd:import namespace="http://general.vos.comun.azkarview.indra.es" />
+            <xsd:import namespace="http://vos.obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es" />
+            <xsd:complexType name="ArrayOfString">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="string" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="obtenerDetalleExpedicion" type="tns:obtenerDetalleExpedicion" />
+            <xsd:complexType name="obtenerDetalleExpedicion">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="arg0" type="ns0:DatosOperacionVO" />
+                    <xsd:element minOccurs="0" name="arg1" type="ns1:DatosObtenerDetalleExpedicionDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="obtenerDetalleExpedicionResponse" type="tns:obtenerDetalleExpedicionResponse" />
+            <xsd:complexType name="obtenerDetalleExpedicionResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="return" type="ns1:ResultadoObtenerDetalleExpedicionDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="obtenerURLSeguimientoPublicoTrackingDirecto" type="tns:obtenerURLSeguimientoPublicoTrackingDirecto" />
+            <xsd:complexType name="obtenerURLSeguimientoPublicoTrackingDirecto">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="arg0" type="ns0:DatosOperacionVO" />
+                    <xsd:element minOccurs="0" name="arg1" type="ns1:DatosObtenerUrlDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="obtenerURLSeguimientoPublicoTrackingDirectoResponse" type="tns:obtenerURLSeguimientoPublicoTrackingDirectoResponse" />
+            <xsd:complexType name="obtenerURLSeguimientoPublicoTrackingDirectoResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="return" type="ns1:ResultadoObtenerUrlDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="obtenerURL" type="tns:obtenerURL" />
+            <xsd:complexType name="obtenerURL">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="arg0" type="ns0:DatosOperacionVO" />
+                    <xsd:element minOccurs="0" name="arg1" type="ns1:DatosObtenerUrlDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="obtenerURLResponse" type="tns:obtenerURLResponse" />
+            <xsd:complexType name="obtenerURLResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="return" type="ns1:ResultadoObtenerUrlDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ServiceException" nillable="true" type="ns2:ServiceException" />
+        </xsd:schema>
+        <xsd:schema xmlns:ns0="http://general.vos.comun.azkarview.indra.es" xmlns:tns="http://vos.obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://vos.obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es">
+            <xsd:import namespace="http://general.vos.comun.azkarview.indra.es" />
+            <xsd:complexType name="ArrayOfDetalleIncidenciaDTO">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="DetalleIncidenciaDTO" nillable="true" type="tns:DetalleIncidenciaDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DatosObtenerUrlDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codPostalDestinatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoEtiqueta" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="localizador" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numReferencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numUnico" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="userAzkarview" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DetalleIncidenciaDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="ampliacionIncidencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoIncidencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoIncidenciaCliente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="descripcionIncidencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fecha" type="xsd:dateTime" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ResultadoObtenerUrlDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="resultadoOperacion" nillable="true" type="ns0:ResultadoOperacionVO" />
+                    <xsd:element minOccurs="0" name="url" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ResultadoObtenerDetalleExpedicionDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="detalleExpedicionDTO" nillable="true" type="tns:ArrayOfDetalleExpedicionDTO" />
+                    <xsd:element minOccurs="0" name="resultadoOperacionVO" nillable="true" type="ns0:ResultadoOperacionVO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DetalleExpedicionDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codBideaDelegacionDestino" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codBideaDelegacionOrigen" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoOrdenante" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoPostalDestino" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoPostalOrigen" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoProveedor" nillable="true" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="codigoRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="delegacionDestino" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="delegacionOrigen" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="descRAEE" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="detalleIncidenciaDTO" nillable="true" type="tns:ArrayOfDetalleIncidenciaDTO" />
+                    <xsd:element minOccurs="0" name="direccionConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionConsignatario2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionConsignatario3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionRemitente2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionRemitente3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="estado" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fecha" type="xsd:dateTime" />
+                    <xsd:element minOccurs="0" name="fechaEntrega" type="xsd:dateTime" />
+                    <xsd:element minOccurs="0" name="fechaEntregaAplazada" type="xsd:dateTime" />
+                    <xsd:element minOccurs="0" name="fechaEstado" nillable="true" type="xsd:dateTime" />
+                    <xsd:element minOccurs="0" name="marcaRAEE" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreConsignatario2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreConsignatario3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreRemitente2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreRemitente3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numeroBultos" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="numeroExpedicion" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numeroRecogida" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numeroUnico" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="observaciones" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="paisDestino" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="paisOrigen" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="pedidoAsociado" nillable="true" type="tns:ArrayOfPedidoAsociadoDTO" />
+                    <xsd:element minOccurs="0" name="personaContactoOrdenante" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="peso" nillable="true" type="xsd:double" />
+                    <xsd:element minOccurs="0" name="poblacionConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="poblacionRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="referencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="referenciaCliente2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="remesa" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="socioInternacional" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="telefonoContactoOrdenante" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="tipoPortes" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="volumen" nillable="true" type="xsd:double" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PedidoAsociadoDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codPedido" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codPedidoCliente" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DatosObtenerDetalleExpedicionDTO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codBideaDelegacionDestino" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codBideaDelegacionOrigen" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codigoBarras" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="expedicion" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fechaExpedicion" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numRecogida" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numReferencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numUnico" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="sscc" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="userAzkarview" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ArrayOfPedidoAsociadoDTO">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="PedidoAsociadoDTO" nillable="true" type="tns:PedidoAsociadoDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ArrayOfDetalleExpedicionDTO">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="DetalleExpedicionDTO" nillable="true" type="tns:DetalleExpedicionDTO" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema xmlns:ns0="http://obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es/" xmlns:tns="http://general.vos.comun.azkarview.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://general.vos.comun.azkarview.indra.es">
+            <xsd:import namespace="http://obtenerDetalleExpedicion.servicios.expediciones.azkarview.indra.es/" />
+            <xsd:complexType name="ResultadoOperacionVO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codigoResultado" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="descripcionResultado" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DatosOperacionVO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codigoIdioma" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="idUsuario" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="numMaxRegConsulta" nillable="true" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="permisos" nillable="true" type="ns0:ArrayOfString" />
+                    <xsd:element minOccurs="0" name="refDomino" type="xsd:boolean" />
+                    <xsd:element minOccurs="0" name="roles" nillable="true" type="ns0:ArrayOfString" />
+                    <xsd:element minOccurs="0" name="tipoUsuario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="usuario" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="obtenerDetalleExpedicion">
+        <wsdl:part element="tns:obtenerDetalleExpedicion" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="obtenerDetalleExpedicionResponse">
+        <wsdl:part element="tns:obtenerDetalleExpedicionResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="obtenerURLResponse">
+        <wsdl:part element="tns:obtenerURLResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="obtenerURLSeguimientoPublicoTrackingDirectoResponse">
+        <wsdl:part element="tns:obtenerURLSeguimientoPublicoTrackingDirectoResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="ServiceException">
+        <wsdl:part element="tns:ServiceException" name="ServiceException" />
+    </wsdl:message>
+    <wsdl:message name="obtenerURL">
+        <wsdl:part element="tns:obtenerURL" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="obtenerURLSeguimientoPublicoTrackingDirecto">
+        <wsdl:part element="tns:obtenerURLSeguimientoPublicoTrackingDirecto" name="parameters" />
+    </wsdl:message>
+    <wsdl:portType name="ObtenerDetalleExpedicionPortType">
+        <wsdl:operation name="obtenerDetalleExpedicion">
+            <wsdl:input message="tns:obtenerDetalleExpedicion" name="obtenerDetalleExpedicion" />
+            <wsdl:output message="tns:obtenerDetalleExpedicionResponse" name="obtenerDetalleExpedicionResponse" />
+            <wsdl:fault message="tns:ServiceException" name="ServiceException" />
+        </wsdl:operation>
+        <wsdl:operation name="obtenerURLSeguimientoPublicoTrackingDirecto">
+            <wsdl:input message="tns:obtenerURLSeguimientoPublicoTrackingDirecto" name="obtenerURLSeguimientoPublicoTrackingDirecto" />
+            <wsdl:output message="tns:obtenerURLSeguimientoPublicoTrackingDirectoResponse" name="obtenerURLSeguimientoPublicoTrackingDirectoResponse" />
+            <wsdl:fault message="tns:ServiceException" name="ServiceException" />
+        </wsdl:operation>
+        <wsdl:operation name="obtenerURL">
+            <wsdl:input message="tns:obtenerURL" name="obtenerURL" />
+            <wsdl:output message="tns:obtenerURLResponse" name="obtenerURLResponse" />
+            <wsdl:fault message="tns:ServiceException" name="ServiceException" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ObtenerDetalleExpedicionSoapBinding" type="tns:ObtenerDetalleExpedicionPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="obtenerDetalleExpedicion">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="obtenerDetalleExpedicion">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="obtenerDetalleExpedicionResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+                <soap:fault name="ServiceException" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerURLSeguimientoPublicoTrackingDirecto">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="obtenerURLSeguimientoPublicoTrackingDirecto">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="obtenerURLSeguimientoPublicoTrackingDirectoResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+                <soap:fault name="ServiceException" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerURL">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="obtenerURL">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="obtenerURLResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+                <soap:fault name="ServiceException" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ObtenerDetalleExpedicion">
+        <wsdl:port binding="tns:ObtenerDetalleExpedicionSoapBinding" name="ObtenerDetalleExpedicionPort">
+            <soap:address location="http://eview.dachser.com/eviewServicios/services/obtenerDetalleExpedicion" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

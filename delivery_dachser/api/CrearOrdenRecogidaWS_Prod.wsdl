@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CrearOrdenRecogidaWS" targetNamespace="http://crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es/">
+    <wsdl:types>
+        <xsd:schema xmlns:tns="http://exceptions.support.ibuilder.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://exceptions.support.ibuilder.indra.es">
+            <xsd:complexType name="ServiceException">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="timestamp" type="xsd:dateTime" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema xmlns:tns="http://vos.crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://vos.crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es">
+            <xsd:complexType name="ResultadoCrearOrdenRecogidaWS">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codigoResultado" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="descripcionResultado" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numeroOrdenRecogida" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numeroPeticion" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="referencia" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DatosCrearOrdenRecogidaWS">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codClienteOrdenante" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codPostalConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codPostalRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codTipoPorte" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codTraficoConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="codTraficoRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="contactoConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="contactoOrdenante" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="contactoRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionConsignatario2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionConsignatario3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionRemitente2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="direccionRemitente3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="emailConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="emailRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fRecFix" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fRecMax" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fRecMin" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="faxRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="fechaEntrega" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="marcaRAEE" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nifConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nifRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreConsignatario2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreConsignatario3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreRemitente2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="nombreRemitente3" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="numBultos" nillable="true" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="observaciones" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="observacionesRecogida" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="paisConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="paisRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="peso" nillable="true" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="poblacionConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="poblacionRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="producto" nillable="true" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="reembolso" nillable="true" type="xsd:double" />
+                    <xsd:element minOccurs="0" name="referencia" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="referenciaCliente2" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="sarNotificacion" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="sarPlataforma" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="telfConsignatario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="telfOrdenante" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="telfRemitente" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="tipoComision" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="usuario" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ArrayOfDatosCrearOrdenRecogidaWS">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="DatosCrearOrdenRecogidaWS" nillable="true" type="tns:DatosCrearOrdenRecogidaWS" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ArrayOfResultadoCrearOrdenRecogidaWS">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="ResultadoCrearOrdenRecogidaWS" nillable="true" type="tns:ResultadoCrearOrdenRecogidaWS" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema xmlns:ns0="http://general.vos.comun.azkarview.indra.es" xmlns:ns1="http://vos.crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es" xmlns:ns2="http://exceptions.support.ibuilder.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es/">
+            <xsd:import namespace="http://general.vos.comun.azkarview.indra.es" />
+            <xsd:import namespace="http://vos.crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es" />
+            <xsd:complexType name="ArrayOfString">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="string" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="crearOrdenRecogidaWS" type="tns:crearOrdenRecogidaWS" />
+            <xsd:complexType name="crearOrdenRecogidaWS">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="arg0" type="ns0:DatosOperacionVO" />
+                    <xsd:element minOccurs="0" name="arg1" type="ns1:ArrayOfDatosCrearOrdenRecogidaWS" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="crearOrdenRecogidaWSResponse" type="tns:crearOrdenRecogidaWSResponse" />
+            <xsd:complexType name="crearOrdenRecogidaWSResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="return" type="ns1:ArrayOfResultadoCrearOrdenRecogidaWS" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ServiceException" nillable="true" type="ns2:ServiceException" />
+        </xsd:schema>
+        <xsd:schema xmlns:ns0="http://crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es/" xmlns:tns="http://general.vos.comun.azkarview.indra.es" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://general.vos.comun.azkarview.indra.es">
+            <xsd:import namespace="http://crearOrdenRecogidaWS.servicios.recogida.azkarview.indra.es/" />
+            <xsd:complexType name="DatosOperacionVO">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="codigoIdioma" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="idUsuario" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="numMaxRegConsulta" nillable="true" type="xsd:int" />
+                    <xsd:element minOccurs="0" name="permisos" nillable="true" type="ns0:ArrayOfString" />
+                    <xsd:element minOccurs="0" name="refDomino" type="xsd:boolean" />
+                    <xsd:element minOccurs="0" name="roles" nillable="true" type="ns0:ArrayOfString" />
+                    <xsd:element minOccurs="0" name="tipoUsuario" nillable="true" type="xsd:string" />
+                    <xsd:element minOccurs="0" name="usuario" nillable="true" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="crearOrdenRecogidaWSResponse">
+        <wsdl:part element="tns:crearOrdenRecogidaWSResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="ServiceException">
+        <wsdl:part element="tns:ServiceException" name="ServiceException" />
+    </wsdl:message>
+    <wsdl:message name="crearOrdenRecogidaWS">
+        <wsdl:part element="tns:crearOrdenRecogidaWS" name="parameters" />
+    </wsdl:message>
+    <wsdl:portType name="CrearOrdenRecogidaWSPortType">
+        <wsdl:operation name="crearOrdenRecogidaWS">
+            <wsdl:input message="tns:crearOrdenRecogidaWS" name="crearOrdenRecogidaWS" />
+            <wsdl:output message="tns:crearOrdenRecogidaWSResponse" name="crearOrdenRecogidaWSResponse" />
+            <wsdl:fault message="tns:ServiceException" name="ServiceException" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CrearOrdenRecogidaWSSoapBinding" type="tns:CrearOrdenRecogidaWSPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="crearOrdenRecogidaWS">
+            <soap:operation soapAction="" style="document" />
+            <wsdl:input name="crearOrdenRecogidaWS">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="crearOrdenRecogidaWSResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+                <soap:fault name="ServiceException" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CrearOrdenRecogidaWS">
+        <wsdl:port binding="tns:CrearOrdenRecogidaWSSoapBinding" name="CrearOrdenRecogidaWSPort">
+            <soap:address location="http://eview.dachser.com/eviewServicios/services/crearOrdenRecogidaWS" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

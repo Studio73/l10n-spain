@@ -1006,7 +1006,7 @@ msgstr ""
 #. module: l10n_es_aeat_sii_oca
 #: code:addons/l10n_es_aeat_sii_oca/models/account_move.py:0
 #, python-format
-msgid "There's a mismatch in taxes for RE. Check them."
+msgid "There's a mismatch in taxes for {}. Check them."
 msgstr ""
 
 #. module: l10n_es_aeat_sii_oca

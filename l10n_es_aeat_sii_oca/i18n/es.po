@@ -1050,8 +1050,8 @@ msgstr "El nº de factura del proveedor es obligatorio"
 #. module: l10n_es_aeat_sii_oca
 #: code:addons/l10n_es_aeat_sii_oca/models/account_move.py:0
 #, python-format
-msgid "There's a mismatch in taxes for RE. Check them."
-msgstr "Hay un cruce erróneo para tasas en RE. Chequéelas."
+msgid "There's a mismatch in taxes for {}. Check them."
+msgstr "Hay un cruce erróneo para tasas en {}. Chequéelas."
 
 #. module: l10n_es_aeat_sii_oca
 #: model:ir.model.fields,field_description:l10n_es_aeat_sii_oca.field_account_bank_statement_line__thirdparty_invoice

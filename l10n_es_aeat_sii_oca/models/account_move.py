@@ -459,24 +459,25 @@ class AccountMove(models.Model):
             header.update({"TipoComunicacion": tipo_comunicacion})
         return header
 
-    def _get_sii_tax_req(self, tax):
-        """Get the associated req tax for the specified tax.
+    def _get_sii_tax_by_key(self, tax, key):
+        """Get the associated tax for the specified tax.
 
         :param self: Single invoice record.
-        :param tax: Initial tax for searching for the RE linked tax.
-        :return: REQ tax (or empty recordset) linked to the provided tax.
+        :param tax: Initial tax for searching for the linked tax.
+        :param key: Tax key to look for.
+        :return: tax (or empty recordset) linked to the provided tax.
         """
         self.ensure_one()
-        taxes_req = self._get_sii_taxes_map(["RE"])
-        re_lines = self.line_ids.filtered(
+        taxes_req = self._get_sii_taxes_map([key])
+        lines = self.line_ids.filtered(
             lambda x: tax in x.tax_ids and x.tax_ids & taxes_req
         )
-        req_tax = re_lines.mapped("tax_ids") & taxes_req
-        if len(req_tax) > 1:
+        found_tax = lines.mapped("tax_ids") & taxes_req
+        if len(found_tax) > 1:
             raise exceptions.UserError(
-                _("There's a mismatch in taxes for RE. Check them.")
+                _("There's a mismatch in taxes for {}. Check them.").format(key)
             )
-        return req_tax
+        return found_tax
 
     @api.model
     def _get_sii_tax_dict(self, tax_line, tax_lines):
@@ -501,10 +502,14 @@ class AccountMove(models.Model):
             key = "CuotaSoportada"
         tax_dict[key] = tax_line["amount"]
         # Recargo de equivalencia
-        req_tax = self._get_sii_tax_req(tax)
+        req_tax = self._get_sii_tax_by_key(tax, "RE")
         if req_tax:
             tax_dict["TipoRecargoEquivalencia"] = req_tax.amount
             tax_dict["CuotaRecargoEquivalencia"] = tax_lines[req_tax]["amount"]
+        # Bienes de inversión
+        sfrbi_tax = self._get_sii_tax_by_key(tax, "SFRBI")
+        if sfrbi_tax:
+            tax_dict["BienInversion"] = "S"
         return tax_dict
 
     def _is_sii_type_breakdown_required(self, taxes_dict):

@@ -10,38 +10,37 @@ class L10nEsAeatMapTax(models.Model):
     _name = 'l10n.es.aeat.map.tax'
 
     date_from = fields.Date(string="From Date")
+    date_from_search = fields.Date(compute="_compute_date_from_search", store=True)
     date_to = fields.Date(string="To Date")
+    date_to_search = fields.Date(compute="_compute_date_to_search", store=True)
     map_line_ids = fields.One2many(
         comodel_name='l10n.es.aeat.map.tax.line',
         inverse_name='map_parent_id', string="Map lines", required=True)
     model = fields.Integer(string="AEAT Model", required=True)
 
     @api.multi
-    @api.constrains('date_from', 'date_to')
+    @api.depends("date_from")
+    def _compute_date_from_search(self):
+        for record in self:
+            record.date_from_search = record.date_from or "1900-01-01"
+
+    @api.multi
+    @api.depends("date_to")
+    def _compute_date_to_search(self):
+        for record in self:
+            record.date_to_search = record.date_to or "2999-12-31"
+
+    @api.multi
+    @api.constrains("date_from", "date_to", "model")
     def _unique_date_range(self):
-        for mapp in self:
-            domain = [('id', '!=', mapp.id)]
-            if mapp.date_from and mapp.date_to:
-                domain += ['|', '&',
-                           ('date_from', '<=', mapp.date_to),
-                           ('date_from', '>=', mapp.date_from),
-                           '|', '&',
-                           ('date_to', '<=', mapp.date_to),
-                           ('date_to', '>=', mapp.date_from),
-                           '|', '&',
-                           ('date_from', '=', False),
-                           ('date_to', '>=', mapp.date_from),
-                           '|', '&',
-                           ('date_to', '=', False),
-                           ('date_from', '<=', mapp.date_to),
-                           ]
-            elif mapp.date_from:
-                domain += [('date_to', '>=', mapp.date_from)]
-            elif mapp.date_to:
-                domain += [('date_from', '<=', mapp.date_to)]
-            date_lst = mapp.search(domain)
-            if date_lst:
-                raise exceptions.ValidationError(
+        for map_tax in self:
+            domain = ["&", ("model", "=", map_tax.model), ("id", "!=", map_tax.id)]
+            if self.date_from:
+                domain.append(("date_to_search", ">=", map_tax.date_from))
+            if self.date_to:
+                domain.append(("date_from_search", "<=", map_tax.date_to))
+            if map_tax.search(domain):
+                raise exceptions.Warning(
                     _("Error! The dates of the record overlap with an "
                       "existing record.")
                 )

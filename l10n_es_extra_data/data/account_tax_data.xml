@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="account_tax_template_p_iva0_s_bc" model="account.tax.template">
+        <field name="type_tax_use">purchase</field>
+        <field name="name">0% IVA soportado (bienes corrientes)</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="0"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
+    </record>
+    <record id="account_tax_template_p_iva5_bc" model="account.tax.template">
+        <field name="type_tax_use">purchase</field>
+        <field name="name">5% IVA soportado (bienes corrientes)</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="5"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="tax_group_iva_5"/>
+    </record>
+    <record id="account_tax_template_p_iva0_s_sc" model="account.tax.template">
+        <field name="type_tax_use">purchase</field>
+        <field name="name">0% IVA soportado (servicios corrientes)</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="0"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
+    </record>
     <record id="account_tax_template_p_iva5_sc" model="account.tax.template">
         <field name="type_tax_use">purchase</field>
         <field name="account_id" ref="l10n_es.pgc_472_child"/>
@@ -128,6 +152,7 @@
         <field name="children_tax_ids" eval="[(6, 0, [ref('account_tax_template_p_iva5_ic_a_1'), ref('account_tax_template_p_iva5_ic_a_1')])]"/>
         <field name="tax_group_id" ref="tax_group_iva_5"/>
     </record>
+    <!-- account_tax_template_p_iva0_ibc en 13.0+ -->
     <record id="account_tax_template_p_iva0_ia" model="account.tax.template">
         <field name="type_tax_use">purchase</field>
         <field name="account_id" ref="l10n_es.pgc_472_child"/>
@@ -138,6 +163,7 @@
         <field name="amount_type">percent</field>
         <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
     </record>
+    <!-- account_tax_template_p_iva5_ibc en 13.0+ -->
     <record id="account_tax_template_p_iva5_ia" model="account.tax.template">
         <field name="type_tax_use">purchase</field>
         <field name="account_id" ref="l10n_es.pgc_472_child"/>
@@ -189,5 +215,77 @@
         <field name="amount" eval="0.62"/>
         <field name="amount_type">percent</field>
         <field name="tax_group_id" ref="tax_group_recargo_0-62"/>
+    </record>
+    <record id="account_tax_template_p_iva0_ic_bc" model="account.tax.template">
+        <field name="amount" eval="0"/>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="name">IVA 0% Adquisición Intracomunitario. Bienes corrientes</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
+    </record>
+    <record id="account_tax_template_p_iva5_ic_bc" model="account.tax.template">
+        <field name="amount" eval="5"/>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="name">IVA 5% Adquisición Intracomunitario. Bienes corrientes</field>
+        <field name="tax_group_id" ref="tax_group_iva_5"/>
+    </record>
+    <record id="account_tax_template_p_iva0_ic_sc" model="account.tax.template">
+        <field name="amount" eval="0"/>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="name">IVA 0% Adquisición de servicios intracomunitarios</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
+    </record>
+    <record id="account_tax_template_p_iva5_ic_sc" model="account.tax.template">
+        <field name="amount" eval="5"/>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="name">IVA 5% Adquisición de servicios intracomunitarios</field>
+        <field name="tax_group_id" ref="tax_group_iva_5"/>
+    </record>
+    <record id="account_tax_template_p_iva0_isc" model="account.tax.template">
+        <field name="type_tax_use">purchase</field>
+        <field name="name">IVA 0% Adquisición de servicios extracomunitarios</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="0"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
+    </record>
+    <record id="account_tax_template_p_iva5_isc" model="account.tax.template">
+        <field name="type_tax_use">purchase</field>
+        <field name="name">IVA 5% Adquisición de servicios extracomunitarios</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="5"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="tax_group_iva_5"/>
+    </record>
+    <record id="account_tax_template_s_iva0b" model="account.tax.template">
+        <field name="type_tax_use">sale</field>
+        <field name="name">IVA 0% (Bienes)</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="0"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
+    </record>
+    <record id="account_tax_template_s_iva5b" model="account.tax.template">
+        <field name="type_tax_use">sale</field>
+        <field name="name">IVA 5% (Bienes)</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="5"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="tax_group_iva_5"/>
+    </record>
+    <record id="account_tax_template_s_iva0s" model="account.tax.template">
+        <field name="type_tax_use">sale</field>
+        <field name="name">IVA 0% (Servicios)</field>
+        <field name="chart_template_id" ref="l10n_es.account_chart_template_common"/>
+        <field name="amount" eval="0"/>
+        <field name="amount_type">percent</field>
+        <field name="tax_group_id" ref="l10n_es.tax_group_iva_0"/>
     </record>
 </odoo>

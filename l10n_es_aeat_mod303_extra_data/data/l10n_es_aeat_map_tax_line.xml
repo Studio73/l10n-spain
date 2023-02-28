@@ -197,12 +197,27 @@
             (4, ref('l10n_es_extra_data.account_tax_template_p_req062'))
         ]"/>
     </record>
+    <record id="l10n_es_aeat_mod303.aeat_mod303_2023_map_line_60" model="l10n.es.aeat.map.tax.line">
+        <field name="tax_ids" eval="[
+            (4, ref('l10n_es_extra_data.account_tax_template_s_iva_ns_b')),
+        ]"/>
+    </record>
     <record id="l10n_es_aeat_mod303.aeat_mod303_2023_map_line_80" model="l10n.es.aeat.map.tax.line">
         <field name="tax_ids" eval="[
             (4, ref('l10n_es_extra_data.account_tax_template_s_iva0b')),
             (4, ref('l10n_es_extra_data.account_tax_template_s_iva5b')),
             (4, ref('l10n_es_extra_data.account_tax_template_s_iva0s')),
             (4, ref('l10n_es_extra_data.account_tax_template_s_iva5s'))
+        ]"/>
+    </record>
+    <record id="l10n_es_aeat_mod303.aeat_mod303_2023_map_line_83" model="l10n.es.aeat.map.tax.line">
+        <field name="tax_ids" eval="[
+            (4, ref('l10n_es_extra_data.account_tax_template_s_iva0_ns')),
+        ]"/>
+    </record>
+    <record id="l10n_es_aeat_mod303.aeat_mod303_2023_map_line_84" model="l10n.es.aeat.map.tax.line">
+        <field name="tax_ids" eval="[
+            (4, ref('l10n_es_extra_data.account_tax_template_s_iva_ns_b')),
         ]"/>
     </record>
     <record id="l10n_es_aeat_mod303.aeat_mod303_2023_map_line_96" model="l10n.es.aeat.map.tax.line">

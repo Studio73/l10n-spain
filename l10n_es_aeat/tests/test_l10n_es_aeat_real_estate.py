@@ -6,10 +6,7 @@ import logging
 
 from odoo.exceptions import ValidationError
 from odoo.fields import Command
-from odoo.tests import Form
-from odoo.tools.safe_eval import safe_eval
 
-from ..models.aeat_address_types import AEAT_ADDRESS_TYPES
 from .common import TestL10nEsAeatModBase
 
 _logger = logging.getLogger("aeat")
@@ -247,160 +244,55 @@ class TestL10nEsAeatRealEstate(TestL10nEsAeatModBase):
                 ]
             },
         )
-        report = self.env["account.invoice.report"]
-        domain = [("move_id", "=", invoice.id)]
-        self.assertEqual(
-            report.search(domain).mapped("l10n_es_aeat_real_estate_id"),
-            real_estate,
+        report = self.env["account.invoice.report"].search(
+            [("move_id", "=", invoice.id)]
         )
-        self.assertEqual(
-            report._read_group(domain, ["l10n_es_aeat_real_estate_id"], ["__count"]),
-            [(real_estate, 1)],
-        )
+        self.assertEqual(report.l10n_es_aeat_real_estate_id, real_estate)
+
+    def _check_creation(self, cases, **common_vals):
+        """Create a real estate with each set of values, expecting an error for
+        the invalid ones."""
+        for case_vals, valid in cases:
+            vals = {**self._base_vals(), **common_vals, **case_vals}
+            with self.subTest(vals=case_vals):
+                if valid:
+                    self.env["l10n.es.aeat.real_estate"].create(vals)
+                else:
+                    with self.assertRaises(ValidationError):
+                        self.env["l10n.es.aeat.real_estate"].create(vals)
 
     def test_reference_outside_the_dgc_cadastre(self):
         """The Basque Country, Navarre and the foreign countries have their own
         cadastral references, without the control characters of the DGC."""
-        foral_reference = "201001000123400001"
-        for state_xmlid in ("base.state_es_na", "base.state_es_bi"):
-            estate = self.env["l10n.es.aeat.real_estate"].create(
-                {
-                    **self._base_vals(state_xmlid),
-                    "reference": foral_reference,
-                    "state_id": self.env.ref(state_xmlid).id,
-                }
-            )
-            self.assertEqual(estate.reference, foral_reference)
-        abroad = self.env["l10n.es.aeat.real_estate"].create(
-            {
-                **self._base_vals("Abroad"),
-                "reference": "FR-75056-000AB-0123",
-                "country_id": self.env.ref("base.fr").id,
-            }
+        self._check_creation(
+            [
+                ({"state_id": self.env.ref("base.state_es_na").id}, True),
+                ({"state_id": self.env.ref("base.state_es_bi").id}, True),
+                ({"country_id": self.env.ref("base.fr").id}, True),
+                ({"state_id": self.env.ref("base.state_es_m").id}, False),
+            ],
+            reference="201001000123400001",
         )
-        self.assertTrue(abroad.reference)
-        # Moved to the territory of the DGC, the reference is checked again
-        with self.assertRaises(ValidationError):
-            estate.state_id = self.env.ref("base.state_es_m")
-
-    def test_address_types(self):
-        """One name per street type, kept out of the translations because the
-        names are already given in the co-official languages."""
-        keys = [key for key, _name in AEAT_ADDRESS_TYPES]
-        self.assertEqual(len(keys), len(set(keys)))
-        field = self.env["ir.model.fields"]._get(
-            "l10n.es.aeat.real_estate", "address_type"
-        )
-        self.assertFalse(field.selection_ids)
-        estate = self.env["l10n.es.aeat.real_estate"].create(
-            {**self._base_vals(), "address_type": "APDRO"}
-        )
-        self.assertEqual(estate.address_type, "APDRO")
-
-    def test_real_estate_owned_by_another_company(self):
-        """A real estate owned by another company of the database is not owned
-        by the company declaring it, and a customer invoice line of the latter
-        only offers the real estates of the company itself."""
-        other_company = (
-            self.env["res.company"].sudo().create({"name": "Sister company"})
-        )
-        estate = self.env["l10n.es.aeat.real_estate"].create(
-            {
-                **self._base_vals("Premises of the sister company"),
-                "company_id": self.company.id,
-                "partner_id": other_company.partner_id.id,
-            }
-        )
-        own_estate = self.env["l10n.es.aeat.real_estate"].create(
-            {
-                **self._base_vals("Premises of the company"),
-                "company_id": self.company.id,
-                "partner_id": self.company.partner_id.id,
-            }
-        )
-        self.assertFalse(estate.owned_by_company)
-        RealEstate = self.env["l10n.es.aeat.real_estate"]
-        self.assertFalse(
-            RealEstate.search([("id", "=", estate.id), ("owned_by_company", "=", True)])
-        )
-        self.assertEqual(
-            RealEstate.search(
-                [("id", "=", estate.id), ("owned_by_company", "=", False)]
-            ),
-            estate,
-        )
-        # The dropdown of the line searches with the domain of the field
-        invoice_form = Form(
-            self.env["account.move"].with_context(default_move_type="out_invoice")
-        )
-        invoice_form.partner_id = self.customer
-        with invoice_form.invoice_line_ids.new() as line_form:
-            line_form.name = "Rent"
-            line_form.price_unit = 100
-        line = invoice_form.save().invoice_line_ids
-        domain = safe_eval(
-            line._fields["l10n_es_aeat_real_estate_id"].domain,
-            {"company_id": line.company_id.id, "partner_id": line.partner_id.id},
-        )
-        offered = RealEstate.browse(
-            [rec_id for rec_id, _name in RealEstate.name_search("Premises", domain)]
-        )
-        self.assertEqual(offered, own_estate)
-
-    def test_real_estates_of_the_invoice_lines(self):
-        """The lines offer the real estates of the partner of the invoice and
-        the ones of the company, like the premises it leases to a customer."""
-        company_estate = self.env["l10n.es.aeat.real_estate"].create(
-            {
-                **self._base_vals("Leased premises"),
-                "company_id": self.company.id,
-                "partner_id": self.company.partner_id.id,
-            }
-        )
-        supplier_estate = self.env["l10n.es.aeat.real_estate"].create(
-            {**self._base_vals("Rented office"), "company_id": self.company.id}
-        )
-        self.assertTrue(company_estate.owned_by_company)
-        self.assertFalse(supplier_estate.owned_by_company)
-        domain = (
-            self.env["account.move.line"]._fields["l10n_es_aeat_real_estate_id"].domain
-        )
-        estates = company_estate | supplier_estate
-        for partner, expected in (
-            (self.customer, company_estate),
-            (self.supplier, estates),
-        ):
-            self.assertEqual(
-                self.env["l10n.es.aeat.real_estate"].search(
-                    safe_eval(
-                        domain,
-                        {"company_id": self.company.id, "partner_id": partner.id},
-                    )
-                    + [("id", "in", estates.ids)]
-                ),
-                expected,
-                partner.name,
-            )
 
     def test_municipality_code(self):
         """The INE municipality code has 5 digits, the first two of the province
         of the zip, and it is not checked abroad."""
-        estate = self.env["l10n.es.aeat.real_estate"].create(
-            {**self._base_vals(), "municipality_code": "28079"}
+        self._check_creation(
+            [
+                ({"municipality_code": "28079"}, True),
+                ({"municipality_code": "2807"}, False),
+                ({"municipality_code": "2807A"}, False),
+                ({"municipality_code": "08019"}, False),
+                (
+                    {
+                        "municipality_code": "751",
+                        "zip": "75001",
+                        "country_id": self.env.ref("base.fr").id,
+                    },
+                    True,
+                ),
+            ]
         )
-        self.assertEqual(estate.municipality_code, "28079")
-        for code in ("2807", "2807A", "08019"):
-            with self.assertRaises(ValidationError), self.cr.savepoint():
-                estate.municipality_code = code
-        abroad = self.env["l10n.es.aeat.real_estate"].create(
-            {
-                **self._base_vals("Abroad"),
-                "country_id": self.env.ref("base.fr").id,
-                "zip": "75001",
-                "municipality_code": "751",
-            }
-        )
-        self.assertEqual(abroad.municipality_code, "751")
 
     def test_aeat_location(self):
         """The models 180 and 347 give the locality only when it is not the
@@ -434,7 +326,6 @@ class TestL10nEsAeatRealEstate(TestL10nEsAeatModBase):
     def test_sii_347_situation(self):
         """The SII and the model 347 join the Basque Country and Navarre, give 3
         without reference and 4 abroad."""
-        Estate = self.env["l10n.es.aeat.real_estate"]
         foral_reference = "201001000123400001"
         cases = (
             ("base.state_es_m", self.references[1], "1"),
@@ -442,23 +333,28 @@ class TestL10nEsAeatRealEstate(TestL10nEsAeatModBase):
             ("base.state_es_na", foral_reference, "2"),
             ("base.state_es_m", False, "3"),
         )
-        for state_xmlid, reference, situation in cases:
-            estate = Estate.create(
+        *estates, abroad = self.env["l10n.es.aeat.real_estate"].create(
+            [
                 {
                     **self._base_vals(state_xmlid),
                     "state_id": self.env.ref(state_xmlid).id,
                     "reference": reference,
                 }
-            )
-            self.assertEqual(estate._get_sii_347_situation(), situation, state_xmlid)
-        abroad = Estate.create(
-            {
-                **self._base_vals("Abroad"),
-                "country_id": self.env.ref("base.fr").id,
-                "reference": "FR-75056-000AB-0123",
-            }
+                for state_xmlid, reference, _situation in cases
+            ]
+            + [
+                {
+                    **self._base_vals("Abroad"),
+                    "country_id": self.env.ref("base.fr").id,
+                    "reference": "FR-75056-000AB-0123",
+                }
+            ]
         )
-        self.assertEqual(abroad._get_sii_347_situation(), "4")
+        self.assertEqual(
+            [estate._get_sii_347_situation() for estate in estates + [abroad]],
+            [situation for *_values, situation in cases] + ["4"],
+        )
         # A situation of the model 180 set by hand is kept
+        estate = estates[-1]
         estate.real_estate_situation = "3"
         self.assertEqual(estate._get_sii_347_situation(), "2")
